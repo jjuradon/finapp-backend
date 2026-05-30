@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "presets": {
+    "multi-repo-branching": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:610865ae47a9b3cf6d37dec09b489d63f8819286b008c6b60b75b557e8320173",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "agy": [
+          "speckit.plan",
+          "speckit.tasks"
+        ],
+        "codex": [
+          "speckit.plan",
+          "speckit.tasks"
+        ]
+      },
+      "registered_skills": [
+        "speckit-plan",
+        "speckit-tasks"
+      ],
+      "installed_at": "2026-05-30T07:23:40.164576+00:00"
+    }
+  }
+}

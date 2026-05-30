@@ -1,14 +1,3 @@
----
-name: speckit-tasks
-description: Break down implementation plans into actionable task lists.
-compatibility: Requires spec-kit project structure with .specify/ directory
-metadata:
-  author: github-spec-kit
-  source: preset:multi-repo-branching
----
-
-# Speckit Tasks Skill
-
 <!-- Based on spec-kit v0.5.1 (SHA: aa2282e) — core content from github/spec-kit -->
 ---
 description: Generate an actionable, dependency-ordered tasks.md for the feature based on available design artifacts.
@@ -22,8 +11,8 @@ handoffs:
     prompt: Start the implementation in phases
     send: true
 scripts:
-  sh: .specify/scripts/bash/check-prerequisites.sh --json
-  ps: .specify/scripts/powershell/check-prerequisites.ps1 -Json
+  sh: scripts/bash/check-prerequisites.sh --json
+  ps: scripts/powershell/check-prerequisites.ps1 -Json
 ---
 
 ## User Input
@@ -44,7 +33,6 @@ You **MUST** consider the user input before proceeding (if not empty).
 - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
   - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- When constructing slash commands from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
 - For each executable hook, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
@@ -96,7 +84,7 @@ You **MUST** consider the user input before proceeding (if not empty).
    - Create parallel execution examples per user story
    - Validate task completeness (each user story has all needed tasks, independently testable)
 
-4. **Generate tasks.md**: Use `.specify/templates/tasks-template.md` as structure, fill with:
+4. **Generate tasks.md**: Use `templates/tasks-template.md` as structure, fill with:
    - Correct feature name from plan.md
 <!-- PRESET: multi-repo-branching START -->
    - Phase 1: Setup tasks (project initialization, **multi-repo branching if applicable**)
@@ -126,7 +114,6 @@ You **MUST** consider the user input before proceeding (if not empty).
    - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
      - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
      - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-   - When constructing slash commands from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
    - For each executable hook, output the following based on its `optional` flag:
      - **Optional hook** (`optional: true`):
        ```
@@ -149,7 +136,7 @@ You **MUST** consider the user input before proceeding (if not empty).
        ```
    - If no hooks are registered or `.specify/extensions.yml` does not exist, skip silently
 
-Context for task generation: $ARGUMENTS
+Context for task generation: {ARGS}
 
 The tasks.md should be immediately executable - each task must be specific enough that an LLM can complete it without additional context.
 
@@ -224,4 +211,3 @@ Every task MUST strictly follow this format:
   - Within each story: Tests (if requested) → Models → Services → Endpoints → Integration
   - Each phase should be a complete, independently testable increment
 - **Final Phase**: Polish & Cross-Cutting Concerns
-

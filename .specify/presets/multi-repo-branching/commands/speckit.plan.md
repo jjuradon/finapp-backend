@@ -1,14 +1,3 @@
----
-name: speckit-plan
-description: Generate technical implementation plans from feature specifications.
-compatibility: Requires spec-kit project structure with .specify/ directory
-metadata:
-  author: github-spec-kit
-  source: preset:multi-repo-branching
----
-
-# Speckit Plan Skill
-
 <!-- Based on spec-kit v0.5.1 (SHA: aa2282e) — core content from github/spec-kit -->
 ---
 description: Execute the implementation planning workflow using the plan template to generate design artifacts.
@@ -21,11 +10,11 @@ handoffs:
     agent: speckit.checklist
     prompt: Create a checklist for the following domain...
 scripts:
-  sh: .specify/scripts/bash/setup-plan.sh --json
-  ps: .specify/scripts/powershell/setup-plan.ps1 -Json
+  sh: scripts/bash/setup-plan.sh --json
+  ps: scripts/powershell/setup-plan.ps1 -Json
 agent_scripts:
-  sh: .specify/scripts/bash/update-agent-context.sh agy
-  ps: .specify/scripts/powershell/update-agent-context.ps1 -AgentType agy
+  sh: scripts/bash/update-agent-context.sh __AGENT__
+  ps: scripts/powershell/update-agent-context.ps1 -AgentType __AGENT__
 ---
 
 ## User Input
@@ -46,7 +35,6 @@ You **MUST** consider the user input before proceeding (if not empty).
 - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
   - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
   - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-- When constructing slash commands from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
 - For each executable hook, output the following based on its `optional` flag:
   - **Optional hook** (`optional: true`):
     ```
@@ -75,7 +63,7 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 1. **Setup**: Run `{SCRIPT}` from repo root and parse JSON for FEATURE_SPEC, IMPL_PLAN, SPECS_DIR, BRANCH. For single quotes in args like "I'm Groot", use escape syntax: e.g 'I'\''m Groot' (or double-quote if possible: "I'm Groot").
 
-2. **Load context**: Read FEATURE_SPEC and `.specify/memory/constitution.md`. Load IMPL_PLAN template (already copied).
+2. **Load context**: Read FEATURE_SPEC and `/memory/constitution.md`. Load IMPL_PLAN template (already copied).
 
 <!-- PRESET: multi-repo-branching START -->
 3. **Discover child repositories**:
@@ -143,7 +131,6 @@ You **MUST** consider the user input before proceeding (if not empty).
    - For each remaining hook, do **not** attempt to interpret or evaluate hook `condition` expressions:
      - If the hook has no `condition` field, or it is null/empty, treat the hook as executable
      - If the hook defines a non-empty `condition`, skip the hook and leave condition evaluation to the HookExecutor implementation
-   - When constructing slash commands from hook command names, replace dots (`.`) with hyphens (`-`). For example, `speckit.git.commit` → `/speckit-git-commit`.
    - For each executable hook, output the following based on its `optional` flag:
      - **Optional hook** (`optional: true`):
        ```
@@ -219,4 +206,3 @@ You **MUST** consider the user input before proceeding (if not empty).
 
 - Use absolute paths
 - ERROR on gate failures or unresolved clarifications
-

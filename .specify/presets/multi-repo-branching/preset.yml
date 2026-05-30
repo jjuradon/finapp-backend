@@ -1,0 +1,33 @@
+schema_version: "1.0"
+
+preset:
+  id: "multi-repo-branching"
+  name: "Multi-Repo Branching"
+  version: "1.0.0"
+  description: "Coordinates feature branch creation across multiple git repositories (independent repos and submodules) during plan and tasks phases."
+  author: "sakitA"
+  repository: "https://github.com/sakitA/spec-kit-preset-multi-repo-branching"
+  license: "MIT"
+
+requires:
+  speckit_version: ">=0.4.0"
+
+provides:
+  templates:
+    - type: "command"
+      name: "speckit.plan"
+      file: "commands/speckit.plan.md"
+      description: "Plan command with multi-repo discovery and analysis"
+      replaces: "speckit.plan"
+
+    - type: "command"
+      name: "speckit.tasks"
+      file: "commands/speckit.tasks.md"
+      description: "Tasks command with multi-repo branch-creation task generation"
+      replaces: "speckit.tasks"
+
+tags:
+  - "multi-repo-branching"
+  - "multi-module"
+  - "submodules"
+  - "monorepo"
