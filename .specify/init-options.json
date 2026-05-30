@@ -6,5 +6,9 @@
   "here": true,
   "integration": "agy",
   "script": "sh",
-  "speckit_version": "0.8.19.dev0"
+  "speckit_version": "0.8.19.dev0",
+  "multi_repo_branching": {
+    "scan_depth": 2,
+    "type": "auto"
+  }
 }
