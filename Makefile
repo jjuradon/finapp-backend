@@ -36,3 +36,14 @@ build:
 # Fails on any high or critical CVE finding.
 audit:
 	uvx pip-audit
+
+# Remove the local .venv directory and all the cached folders.
+clean:
+	rm -rf .venv
+	rm -rf .cache
+	rm -rf .pytest_cache
+	rm -rf .coverage
+	rm -rf .ruff_cache
+	rm -rf .mypy_cache
+	rm -rf *.egg-info
+	rm -rf **/__pycache__
