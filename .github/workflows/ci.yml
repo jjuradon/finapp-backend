@@ -45,6 +45,6 @@ jobs:
       - run: uv sync --frozen
       - run: uv run pytest tests/ -v
         env:
-          TEST_DATABASE_URL: postgresql+asyncpg://finapp:changeme@localhost:5432/finapp_test
+          DATABASE_URL: postgresql+asyncpg://finapp:changeme@localhost:5432/finapp_test
         # Full test suite with coverage thresholds is enforced from M2 onward
         # when the first real tests exist.
